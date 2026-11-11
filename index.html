@@ -1,0 +1,667 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brasa & Sabor | Hamburgueria em Osasco</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0f0f0f;
+  --bg2: #1a1a1a;
+  --orange: #ff6b00;
+  --orange-dark: #e55a00;
+  --yellow: #ffb800;
+  --text: #f5f5f5;
+  --muted: #aaa;
+  --green: #25d366;
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.6;
+}
+h1,h2,h3 { font-family: 'Bebas Neue', sans-serif; letter-spacing:1px; }
+img { max-width:100%; display:block; }
+.container { max-width:1200px; margin:0 auto; padding:0 20px; }
+
+/* HEADER */
+header {
+  position:fixed; top:0; left:0; right:0;
+  background: rgba(15,15,15,.95);
+  backdrop-filter: blur(10px);
+  z-index:1000;
+  border-bottom:1px solid #222;
+  padding:12px 0;
+}
+.header-inner {
+  display:flex; align-items:center; justify-content:space-between;
+}
+.logo {
+  font-family:'Bebas Neue',sans-serif;
+  font-size:28px;
+  color:var(--orange);
+  text-decoration:none;
+}
+nav a {
+  color:var(--text);
+  text-decoration:none;
+  margin-left:24px;
+  font-weight:500;
+  font-size:15px;
+}
+nav a:hover { color:var(--orange); }
+.btn {
+  display:inline-block;
+  background:var(--orange);
+  color:#fff;
+  padding:12px 24px;
+  border-radius:50px;
+  text-decoration:none;
+  font-weight:600;
+  border:none;
+  cursor:pointer;
+  transition:.3s;
+  font-size:15px;
+}
+.btn:hover { background:var(--orange-dark); transform:translateY(-2px); }
+.btn-outline {
+  background:transparent;
+  border:2px solid var(--orange);
+  color:var(--orange);
+}
+.btn-outline:hover { background:var(--orange); color:#fff; }
+
+/* HERO */
+.hero {
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  padding:100px 0 60px;
+  background: linear-gradient(135deg, #0f0f0f 0%, #1a1200 100%);
+}
+.hero-grid {
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+  align-items:center;
+}
+.hero h1 {
+  font-size:clamp(48px, 8vw, 84px);
+  line-height:.9;
+  margin-bottom:16px;
+  color:#fff;
+}
+.hero h1 span { color:var(--orange); }
+.hero p { font-size:18px; color:var(--muted); margin-bottom:20px; max-width:480px; }
+.badge {
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+  background:#222;
+  padding:8px 16px;
+  border-radius:50px;
+  font-size:14px;
+  margin-bottom:24px;
+}
+.badge span { color:var(--yellow); }
+.hero-btns { display:flex; gap:12px; flex-wrap:wrap; }
+.hero img {
+  border-radius:20px;
+  box-shadow:0 20px 60px rgba(255,107,0,.25);
+  width:100%;
+  height:420px;
+  object-fit:cover;
+}
+
+/* SECTIONS */
+section { padding:80px 0; }
+h2 {
+  font-size:48px;
+  text-align:center;
+  margin-bottom:40px;
+  color:#fff;
+}
+h2 span { color:var(--orange); }
+
+/* MENU */
+.filters {
+  display:flex;
+  justify-content:center;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:40px;
+}
+.filter-btn {
+  background:#222;
+  border:none;
+  color:#fff;
+  padding:10px 20px;
+  border-radius:50px;
+  cursor:pointer;
+  font-weight:500;
+  transition:.3s;
+}
+.filter-btn.active, .filter-btn:hover {
+  background:var(--orange);
+}
+.menu-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fill, minmax(260px,1fr));
+  gap:24px;
+}
+.card {
+  background:var(--bg2);
+  border-radius:16px;
+  overflow:hidden;
+  transition:.3s;
+  border:1px solid #222;
+}
+.card:hover { transform:translateY(-8px); border-color:var(--orange); }
+.card img { height:180px; width:100%; object-fit:cover; }
+.card-body { padding:16px; }
+.card h3 { font-size:22px; margin-bottom:6px; }
+.card p { font-size:14px; color:var(--muted); margin-bottom:12px; }
+.card-footer {
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.price { font-size:20px; font-weight:700; color:var(--orange); }
+.add-btn {
+  background:var(--orange);
+  color:#fff;
+  border:none;
+  width:36px; height:36px;
+  border-radius:50%;
+  font-size:20px;
+  cursor:pointer;
+  transition:.2s;
+}
+.add-btn:hover { background:var(--orange-dark); }
+
+/* CART */
+.cart-btn {
+  position:fixed;
+  bottom:24px;
+  right:24px;
+  background:var(--orange);
+  width:60px; height:60px;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:26px;
+  cursor:pointer;
+  z-index:999;
+  box-shadow:0 8px 25px rgba(255,107,0,.4);
+  border:none;
+  color:#fff;
+}
+.cart-count {
+  position:absolute;
+  top:-6px; right:-6px;
+  background:var(--yellow);
+  color:#000;
+  width:22px; height:22px;
+  border-radius:50%;
+  font-size:12px;
+  font-weight:700;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.cart-panel {
+  position:fixed;
+  top:0; right:-420px;
+  width:400px;
+  max-width:100%;
+  height:100%;
+  background:#111;
+  z-index:1001;
+  transition:.4s;
+  display:flex;
+  flex-direction:column;
+  box-shadow:-10px 0 40px rgba(0,0,0,.5);
+}
+.cart-panel.open { right:0; }
+.cart-header {
+  padding:20px;
+  border-bottom:1px solid #222;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+}
+.cart-items {
+  flex:1;
+  overflow-y:auto;
+  padding:16px;
+}
+.cart-item {
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+  padding-bottom:16px;
+  border-bottom:1px solid #222;
+}
+.cart-item img { width:70px; height:70px; object-fit:cover; border-radius:8px; }
+.qty-controls {
+  display:flex;
+  align-items:center;
+  gap:8px;
+  margin-top:6px;
+}
+.qty-controls button {
+  width:26px; height:26px;
+  border:none;
+  background:#333;
+  color:#fff;
+  border-radius:4px;
+  cursor:pointer;
+}
+.cart-footer {
+  padding:20px;
+  border-top:1px solid #222;
+  background:#0a0a0a;
+}
+.cart-footer input, .cart-footer select, .cart-footer textarea {
+  width:100%;
+  padding:10px;
+  margin-bottom:10px;
+  border-radius:8px;
+  border:1px solid #333;
+  background:#1a1a1a;
+  color:#fff;
+}
+.total-line {
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:6px;
+  font-size:14px;
+}
+.total-line.final {
+  font-size:18px;
+  font-weight:700;
+  color:var(--orange);
+  margin:10px 0;
+}
+.whatsapp-btn {
+  background:var(--green);
+  color:#fff;
+  width:100%;
+  padding:14px;
+  border:none;
+  border-radius:50px;
+  font-weight:700;
+  font-size:16px;
+  cursor:pointer;
+}
+
+/* MODAL */
+.modal {
+  display:none;
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.8);
+  z-index:2000;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+.modal.open { display:flex; }
+.modal-content {
+  background:#1a1a1a;
+  border-radius:16px;
+  max-width:500px;
+  width:100%;
+  overflow:hidden;
+  position:relative;
+}
+.modal-content img { width:100%; height:240px; object-fit:cover; }
+.modal-body { padding:20px; }
+.close-modal {
+  position:absolute;
+  top:12px; right:12px;
+  background:#000;
+  color:#fff;
+  border:none;
+  width:32px; height:32px;
+  border-radius:50%;
+  cursor:pointer;
+  font-size:18px;
+}
+
+/* REVIEWS */
+.reviews-grid {
+  display:grid;
+  grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
+  gap:20px;
+}
+.review {
+  background:var(--bg2);
+  padding:20px;
+  border-radius:16px;
+  border:1px solid #222;
+}
+.stars { color:var(--yellow); margin-bottom:8px; }
+
+/* RESERVE */
+.reserve-form {
+  max-width:500px;
+  margin:0 auto;
+  background:var(--bg2);
+  padding:30px;
+  border-radius:16px;
+}
+.reserve-form input, .reserve-form select, .reserve-form textarea {
+  width:100%;
+  padding:12px;
+  margin-bottom:12px;
+  border-radius:8px;
+  border:1px solid #333;
+  background:#111;
+  color:#fff;
+}
+
+/* FOOTER */
+footer {
+  background:#0a0a0a;
+  padding:40px 0;
+  text-align:center;
+  border-top:1px solid #222;
+  color:var(--muted);
+}
+
+@media (max-width:768px) {
+  .hero-grid { grid-template-columns:1fr; text-align:center; }
+  .hero-btns { justify-content:center; }
+  nav { display:none; }
+  .hero img { height:280px; }
+  .cart-panel { width:100%; }
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="container header-inner">
+    <a href="#" class="logo">BRASA & SABOR</a>
+    <nav>
+      <a href="#inicio">Início</a>
+      <a href="#cardapio">Cardápio</a>
+      <a href="#avaliacoes">Avaliações</a>
+      <a href="#reservar">Reservar</a>
+    </nav>
+    <a href="#cardapio" class="btn">Pedir Agora</a>
+  </div>
+</header>
+
+<section class="hero" id="inicio">
+  <div class="container hero-grid">
+    <div>
+      <div class="badge"><span>★</span> 4.9 — 1.240 avaliações</div>
+      <h1>O hambúrguer que <span>Osasco</span> ama.</h1>
+      <p>Suculento, no ponto e entregue quentinho em até 35 min.</p>
+      <div class="hero-btns">
+        <a href="#cardapio" class="btn">Pedir Agora</a>
+        <a href="#reservar" class="btn btn-outline">Reservar Mesa</a>
+      </div>
+    </div>
+    <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=800&q=80" alt="Hambúrguer artesanal">
+  </div>
+</section>
+
+<section id="cardapio">
+  <div class="container">
+    <h2>Cardápio <span>Artesanal</span></h2>
+    <div class="filters">
+      <button class="filter-btn active" data-filter="todos">Todos</button>
+      <button class="filter-btn" data-filter="lanches">Lanches</button>
+      <button class="filter-btn" data-filter="porcoes">Porções</button>
+      <button class="filter-btn" data-filter="bebidas">Bebidas</button>
+      <button class="filter-btn" data-filter="sobremesas">Sobremesas</button>
+    </div>
+    <div class="menu-grid" id="menuGrid"></div>
+  </div>
+</section>
+
+<section id="avaliacoes" style="background:#111">
+  <div class="container">
+    <h2>O que o <span>Osasco</span> fala</h2>
+    <div class="reviews-grid">
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>"Melhor smash da região. Carne no ponto e pão fresco."</p>
+        <strong>— Lucas M.</strong>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>"Entrega rápida e o hambúrguer chegou quentinho. Recomendo!"</p>
+        <strong>— Fernanda S.</strong>
+      </div>
+      <div class="review">
+        <div class="stars">★★★★★</div>
+        <p>"Ambiente top e o Duplo Brasa é absurdo de bom."</p>
+        <strong>— Rafael C.</strong>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="reservar">
+  <div class="container">
+    <h2>Reservar <span>Mesa</span></h2>
+    <form class="reserve-form" onsubmit="event.preventDefault(); alert('Reserva enviada! Entraremos em contato.'); this.reset();">
+      <input type="text" placeholder="Seu nome" required>
+      <input type="tel" placeholder="WhatsApp" required>
+      <input type="date" required>
+      <select required>
+        <option value="">Horário</option>
+        <option>18:00</option><option>18:30</option><option>19:00</option>
+        <option>19:30</option><option>20:00</option><option>20:30</option>
+      </select>
+      <input type="number" placeholder="Número de pessoas" min="1" required>
+      <button type="submit" class="btn" style="width:100%;">Reservar Agora</button>
+    </form>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <strong>Brasa & Sabor</strong> — Hamburgueria em Osasco<br>
+    📍 Osasco, SP • 📞 (11) 99999-9999<br>
+    <small>Amostra de portfólio • Desenvolvido para comércios locais</small>
+  </div>
+</footer>
+
+<!-- Cart Button -->
+<button class="cart-btn" onclick="toggleCart()">
+  🛒
+  <span class="cart-count" id="cartCount">0</span>
+</button>
+
+<!-- Cart Panel -->
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-header">
+    <h3>Seu Pedido</h3>
+    <button onclick="toggleCart()" style="background:none;border:none;color:#fff;font-size:24px;cursor:pointer;">×</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-footer">
+    <select id="deliveryType">
+      <option value="entrega">Entrega (R$ 5,00)</option>
+      <option value="retirada">Retirada na loja</option>
+    </select>
+    <input type="text" id="customerName" placeholder="Seu nome">
+    <textarea id="obs" placeholder="Observação (opcional)" rows="2"></textarea>
+    <div class="total-line"><span>Subtotal</span><span id="subtotal">R$ 0,00</span></div>
+    <div class="total-line"><span>Taxa</span><span id="taxa">R$ 5,00</span></div>
+    <div class="total-line final"><span>Total</span><span id="total">R$ 5,00</span></div>
+    <button class="whatsapp-btn" onclick="finalizarPedido()">Finalizar Pedido no WhatsApp</button>
+  </div>
+</div>
+
+<!-- Product Modal -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <button class="close-modal" onclick="closeModal()">×</button>
+    <img id="modalImg" src="" alt="">
+    <div class="modal-body">
+      <h3 id="modalName"></h3>
+      <p id="modalDesc" style="color:#aaa;margin:8px 0;"></p>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px;">
+        <span id="modalPrice" style="font-size:24px;font-weight:700;color:var(--orange);"></span>
+        <button class="btn" onclick="addFromModal()">+ Adicionar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const products = [
+  {id:1, name:"Smash da Casa", desc:"Pão brioche, smash 120g, queijo cheddar, cebola caramelizada e molho especial.", price:28.90, cat:"lanches", img:"https://images.unsplash.com/photo-1568901346375-23c9450c58cd?w=600&q=80"},
+  {id:2, name:"Duplo Brasa", desc:"Dois smashs, queijo duplo, bacon crocante e picles.", price:36.90, cat:"lanches", img:"https://images.unsplash.com/photo-1550547660-d9450f859349?w=600&q=80"},
+  {id:3, name:"Brasa Chicken", desc:"Frango empanado crocante, alface, tomate e maionese da casa.", price:26.90, cat:"lanches", img:"https://images.unsplash.com/photo-1606755962773-d324e0a13086?w=600&q=80"},
+  {id:4, name:"Veggie Brasa", desc:"Hambúrguer de grão-de-bico, queijo vegetal e rúcula.", price:29.90, cat:"lanches", img:"https://images.unsplash.com/photo-1520072959219-c595dc870360?w=600&q=80"},
+  {id:5, name:"Batata Crocante", desc:"Porção grande de batata frita sequinha com sal especial.", price:18.90, cat:"porcoes", img:"https://images.unsplash.com/photo-1573080496219-bb080dd4f877?w=600&q=80"},
+  {id:6, name:"Anéis de Cebola", desc:"Anéis crocantes com molho barbecue.", price:16.90, cat:"porcoes", img:"https://images.unsplash.com/photo-1630384060421-cb20d0e0649d?w=600&q=80"},
+  {id:7, name:"Milkshake Oreo", desc:"Milkshake cremoso de Oreo com chantilly.", price:22.90, cat:"bebidas", img:"https://images.unsplash.com/photo-1572490122747-3968b75cc699?w=600&q=80"},
+  {id:8, name:"Refrigerante Lata", desc:"Coca-Cola, Guaraná ou Sprite.", price:7.90, cat:"bebidas", img:"https://images.unsplash.com/photo-1629203851122-3726ecdf080e?w=600&q=80"},
+  {id:9, name:"Brownie com Sorvete", desc:"Brownie quente com bola de sorvete de baunilha.", price:19.90, cat:"sobremesas", img:"https://images.unsplash.com/photo-1606313564200-e75d5e30476c?w=600&q=80"},
+];
+
+let cart = [];
+let currentProduct = null;
+
+function renderMenu(filter = 'todos') {
+  const grid = document.getElementById('menuGrid');
+  const filtered = filter === 'todos' ? products : products.filter(p => p.cat === filter);
+  grid.innerHTML = filtered.map(p => `
+    <div class="card" onclick="openModal(${p.id})">
+      <img src="${p.img}" alt="${p.name}">
+      <div class="card-body">
+        <h3>${p.name}</h3>
+        <p>${p.desc}</p>
+        <div class="card-footer">
+          <span class="price">R$ ${p.price.toFixed(2).replace('.',',')}</span>
+          <button class="add-btn" onclick="event.stopPropagation(); addToCart(${p.id})">+</button>
+        </div>
+      </div>
+    </div>
+  `).join('');
+}
+
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    renderMenu(btn.dataset.filter);
+  });
+});
+
+function openModal(id) {
+  currentProduct = products.find(p => p.id === id);
+  document.getElementById('modalImg').src = currentProduct.img;
+  document.getElementById('modalName').textContent = currentProduct.name;
+  document.getElementById('modalDesc').textContent = currentProduct.desc;
+  document.getElementById('modalPrice').textContent = 'R$ ' + currentProduct.price.toFixed(2).replace('.',',');
+  document.getElementById('modal').classList.add('open');
+}
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+function addFromModal() { addToCart(currentProduct.id); closeModal(); }
+
+function addToCart(id) {
+  const p = products.find(x => x.id === id);
+  const existing = cart.find(x => x.id === id);
+  if (existing) existing.qty++;
+  else cart.push({...p, qty:1});
+  updateCart();
+}
+
+function updateCart() {
+  const count = cart.reduce((s,i) => s + i.qty, 0);
+  document.getElementById('cartCount').textContent = count;
+
+  const itemsEl = document.getElementById('cartItems');
+  if (cart.length === 0) {
+    itemsEl.innerHTML = '<p style="text-align:center;color:#666;padding:40px 0;">Carrinho vazio</p>';
+  } else {
+    itemsEl.innerHTML = cart.map(item => `
+      <div class="cart-item">
+        <img src="${item.img}" alt="">
+        <div style="flex:1">
+          <strong>${item.name}</strong>
+          <div>R$ ${(item.price * item.qty).toFixed(2).replace('.',',')}</div>
+          <div class="qty-controls">
+            <button onclick="changeQty(${item.id}, -1)">−</button>
+            <span>${item.qty}</span>
+            <button onclick="changeQty(${item.id}, 1)">+</button>
+            <button onclick="removeItem(${item.id})" style="margin-left:auto;background:#444;">🗑</button>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  const subtotal = cart.reduce((s,i) => s + i.price * i.qty, 0);
+  const isEntrega = document.getElementById('deliveryType').value === 'entrega';
+  const taxa = isEntrega ? 5 : 0;
+  document.getElementById('subtotal').textContent = 'R$ ' + subtotal.toFixed(2).replace('.',',');
+  document.getElementById('taxa').textContent = 'R$ ' + taxa.toFixed(2).replace('.',',');
+  document.getElementById('total').textContent = 'R$ ' + (subtotal + taxa).toFixed(2).replace('.',',');
+}
+
+function changeQty(id, delta) {
+  const item = cart.find(i => i.id === id);
+  if (!item) return;
+  item.qty += delta;
+  if (item.qty <= 0) cart = cart.filter(i => i.id !== id);
+  updateCart();
+}
+function removeItem(id) {
+  cart = cart.filter(i => i.id !== id);
+  updateCart();
+}
+
+function toggleCart() {
+  document.getElementById('cartPanel').classList.toggle('open');
+}
+
+document.getElementById('deliveryType').addEventListener('change', updateCart);
+
+function finalizarPedido() {
+  if (cart.length === 0) return alert('Adicione itens ao carrinho');
+  const nome = document.getElementById('customerName').value || 'Cliente';
+  const obs = document.getElementById('obs').value;
+  const tipo = document.getElementById('deliveryType').value === 'entrega' ? 'Entrega' : 'Retirada';
+  const total = document.getElementById('total').textContent;
+
+  let msg = `*Pedido Brasa & Sabor*\n\n`;
+  msg += `*Nome:* ${nome}\n`;
+  msg += `*Tipo:* ${tipo}\n\n`;
+  cart.forEach(i => {
+    msg += `• ${i.qty}x ${i.name} - R$ ${(i.price*i.qty).toFixed(2).replace('.',',')}\n`;
+  });
+  msg += `\n*Total: ${total}*`;
+  if (obs) msg += `\n*Obs:* ${obs}`;
+
+  const phone = '5511999999999'; // Coloque o WhatsApp real aqui
+  const url = `https://wa.me/${phone}?text=${encodeURIComponent(msg)}`;
+  window.open(url, '_blank');
+}
+
+// Init
+renderMenu();
+updateCart();
+
+// Close modal on outside click
+document.getElementById('modal').addEventListener('click', e => {
+  if (e.target.id === 'modal') closeModal();
+});
+</script>
+</body>
+</html>
